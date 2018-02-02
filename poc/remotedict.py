@@ -1,6 +1,43 @@
+from shlex import shlex
+
 import pymongo
 from bson import ObjectId
 from pymongo import MongoClient
+
+def str_to_mongo_query(query:str):
+    """
+    Converts a string into a mongo query.
+    :param query: string containing the query. Syntax:
+
+    value = 2
+
+    :return:
+    """
+    operators = ["and", "or", ">", "<", "=", "!", "<=", ">="]
+
+    sentences = shlex(query)
+
+    # Let's hierach in a tree
+    stack = []
+
+    sentence_order = ""
+    for sentence in sentences:
+
+        if sentence in operators:
+            stack.append(sentence)
+            stack.append(sentence_order)
+            sentence_order = ""
+        else:
+            sentence_order += " " + sentence
+
+        #        if sentence
+        print(sentence)
+
+
+    print("Stack: ", stack)
+
+
+
 
 
 class MongoDict():
@@ -19,9 +56,12 @@ class MongoDict():
 
     def __getitem__(self, item):
         if type(item) is dict:
-            result = self._instance.find_one(item)
+            result = self._instance.find_one(item, {'_id': 0, 'key':0})
         else:
-            result = self._instance.find_one({'key': item}, {'_id': 0, 'value':1})['value']
+            result = self._instance.find_one({'key': item}, {'_id': 0, 'value':1})
+
+        if result is not None:
+            result = result['value']
 
         return result
 
@@ -54,10 +94,16 @@ class MongoDict():
 
 m = MongoDict(original_dict=ObjectId('5a720122b9a7c0403a5b376c'), mongo_host="172.17.0.1", mongo_port=27015)
 
-#m['example'] = "hi"
-print(m['example'])
+m['example'] = {"hi": 2}
+m['example2'] = {"hi": 3}
+m['example4'] = {"hi": 4}
 
-print(m.keys())
+
+print(m[{'value':{'hi': 4}}])
+
+#print(m.keys())
 
 del m['example']
-print(m.keys())
+#print(m.keys())
+
+print(str_to_mongo_query("(example = 2)"))
