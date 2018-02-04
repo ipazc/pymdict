@@ -3,41 +3,7 @@ from shlex import shlex
 import pymongo
 from bson import ObjectId
 from pymongo import MongoClient
-
-def str_to_mongo_query(query:str):
-    """
-    Converts a string into a mongo query.
-    :param query: string containing the query. Syntax:
-
-    value = 2
-
-    :return:
-    """
-    operators = ["and", "or", ">", "<", "=", "!", "<=", ">="]
-
-    sentences = shlex(query)
-
-    # Let's hierach in a tree
-    stack = []
-
-    sentence_order = ""
-    for sentence in sentences:
-
-        if sentence in operators:
-            stack.append(sentence)
-            stack.append(sentence_order)
-            sentence_order = ""
-        else:
-            sentence_order += " " + sentence
-
-        #        if sentence
-        print(sentence)
-
-
-    print("Stack: ", stack)
-
-
-
+from pymongo.errors import ConnectionFailure
 
 
 class MongoDict():
@@ -47,7 +13,11 @@ class MongoDict():
         if original_dict is None:
             original_dict = ObjectId()
 
-        self._client = MongoClient(host=mongo_host, port=mongo_port)
+        try:
+            self._client = MongoClient(host=mongo_host, port=mongo_port)
+        except ConnectionFailure:
+            raise ConnectionError("No connection to the remote dict backend.") from None
+
         self._storage = self._client['mongo_dicts']
         self._instance = self._storage[str(original_dict)]
         self._instance.create_index([('key', pymongo.TEXT)], name='key_index')
