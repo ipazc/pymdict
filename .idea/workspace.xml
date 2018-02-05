@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/poc/argparser.py" line="346" mnemonic="1" />
+    <bookmark url="file://$PROJECT_DIR$/poc/argparser.py" line="301" mnemonic="2" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="2c5cb768-ff8c-4a0e-a3ba-29e7619dd963" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/rdict.iml" afterPath="$PROJECT_DIR$/.idea/rdict.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/poc/argparser.py" afterPath="$PROJECT_DIR$/poc/argparser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/poc/remotedict.py" afterPath="$PROJECT_DIR$/poc/remotedict.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -15,14 +16,56 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="remotedict.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-465">
+              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#23#0" expanded="true" />
+                <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+                <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="argparser.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/poc/argparser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+            <state relative-caret-position="45">
+              <caret line="315" column="27" lean-forward="false" selection-start-line="315" selection-start-column="27" selection-end-line="315" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="codecs.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/notebook/lib/python3.4/codecs.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="collection.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9705">
+              <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -69,26 +112,24 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mongodict" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mongodict" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="poc" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="rdict" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rdict" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="rdict" type="b2602c69:ProjectViewProjectNode" />
+              <item name="rdict" type="462c0819:PsiDirectoryNode" />
+              <item name="poc" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -108,60 +149,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.argparser (1)">
-    <configuration default="false" name="remotedict" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/poc" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="rdict" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poc/remotedict.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="argparser" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="rdict" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/argparser.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="argparser (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/poc" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="rdict" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poc/argparser.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -227,6 +214,57 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
+    <configuration name="argparser (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$USER_HOME$/notebook/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/poc" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rdict" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poc/argparser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="argparser" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rdict" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/argparser.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
+    <configuration name="remotedict" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/poc" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rdict" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poc/remotedict.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+    </configuration>
     <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Python.remotedict" />
       <item index="1" class="java.lang.String" itemvalue="Python.argparser" />
@@ -254,27 +292,38 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="6" />
+    <frame x="0" y="0" width="1366" height="768" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18162394" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25340393" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32838982" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993644" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39937598" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32838982" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18162394" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3993644" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -303,8 +352,26 @@
           <line>12</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/poc/argparser.py</url>
+          <line>67</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/poc/argparser.py</url>
+          <line>131</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/poc/argparser.py</url>
+          <line>301</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="6" />
+      <breakpoints-dialog>
+        <breakpoints-dialog />
+      </breakpoints-dialog>
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -313,6 +380,64 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9705">
+          <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9705">
+          <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/poc/argparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="57" column="55" lean-forward="true" selection-start-line="57" selection-start-column="55" selection-end-line="57" selection-end-column="55" />
           <folding />
         </state>
       </provider>
@@ -321,33 +446,147 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9705">
+          <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py" />
-    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py" />
-    <entry file="file://$PROJECT_DIR$/argparser.py" />
-    <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py">
+    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="46" column="8" lean-forward="true" selection-start-line="46" selection-start-column="8" selection-end-line="46" selection-end-column="8" />
+        <state relative-caret-position="9705">
+          <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="25" lean-forward="true" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
+        <state relative-caret-position="15">
+          <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/argparser.py" />
+    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py" />
+    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9705">
+          <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/argparser.py" />
+    <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py" />
+    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-465">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+            <marker date="1517822608291" expanded="true" signature="552:787" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="552:1888" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="821:1113" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1153:1246" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1267:1304" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1328:1389" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1414:1475" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1498:1560" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1585:1675" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1708:1752" ph="..." />
+            <marker date="1517822608291" expanded="true" signature="1774:1888" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/notebook/lib/python3.4/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="306" column="0" lean-forward="false" selection-start-line="306" selection-start-column="0" selection-end-line="306" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/poc/argparser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="83" column="0" lean-forward="true" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+        <state relative-caret-position="45">
+          <caret line="315" column="27" lean-forward="false" selection-start-line="315" selection-start-column="27" selection-end-line="315" selection-end-column="27" />
           <folding />
         </state>
       </provider>
