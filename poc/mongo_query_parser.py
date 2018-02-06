@@ -1,6 +1,12 @@
+#!/usr/bin/env python3
+# encoding: utf-8
+import re
 
 
 class MongoQueryParser():
+    """
+    Allows to process a string query and to convert it into a mongo query.
+    """
 
     def __init__(self):
         pass
@@ -42,6 +48,7 @@ class MongoQueryParser():
             >=               greater or equal than a number
             <=               lesser or equal than a number
             %                Regex match
+            !%               Regex not match
             in               in a list of values
 
             or               To join two conditions in OR
@@ -58,7 +65,20 @@ class MongoQueryParser():
         return mongo
 
     @staticmethod
-    def _do_split(text:str, separator:str= " ", open_splits:list=None, close_splits:list=None, special_separators:list=None):
+    def _do_split(text:str, separator:str=" ", open_splits:list=None, close_splits:list=None, special_separators:list=None):
+        """
+        Splits a text into chunks. Same functionality as string.split() but it allows to split text in a more complex
+        way.
+
+
+        :param text: text to split
+        :param separator: separator to use. For example, a " " will split the text in chunks separated by spaces.
+        :param open_splits:  If a more complex separation is required, for example those between brackets, then here
+        it can be specified the open token
+        :param close_splits:
+        :param special_separators:
+        :return:
+        """
 
         if open_splits is None:
             open_splits = []
@@ -79,7 +99,7 @@ class MongoQueryParser():
             l_1 = l_2
             l_2 = text[index]
 
-            if l_2 in open_splits and (l_1 == separator or separator == ""):
+            if l_2 in open_splits and (l_1 == '' or l_1 == separator or separator == ""):
                 open_split_index = open_splits.index(l_2)
 
                 segment = MongoQueryParser._do_encapsulated_split(text[index:], sep_init=l_2, sep_end=close_splits[open_split_index], include_separators=l_2 in special_separators)
@@ -101,7 +121,15 @@ class MongoQueryParser():
 
     @staticmethod
     def _do_encapsulated_split(text:str, sep_init="(", sep_end=")", include_separators=False):
-
+        """
+        Splits by text between tokens.
+        :param text: text to split
+        :param sep_init: token that specifies the start of the segment
+        :param sep_end: token that specifies the end of the segment
+        :param include_separators: boolean flag that specifies if the token separators should be included in the
+        segment or not.
+        :return: split segments
+        """
         segment = ""
         open = False
         ESCAPE_CHAR = '\\'
@@ -112,7 +140,6 @@ class MongoQueryParser():
                 open = True
 
             elif l == sep_end and previous != ESCAPE_CHAR:
-                open = False
                 break
 
             elif open:
@@ -123,7 +150,11 @@ class MongoQueryParser():
 
 
     def _retrieve_ops2_tree(splits:list):
-        first_level_operators = [">", "<", "=", "!=", ">=", "<=", "eq", "!eq", "in", "%"]
+        """
+        Retrieves the ops tree for second level operations.
+        :return:
+        """
+        first_level_operators = [">", "<", "=", "!=", ">=", "<=", "eq", "!eq", "in", "%", "!%"]
 
         # splits should be a 3 elements list : operand1 operator operand2
         if len(splits) < 3:
@@ -139,6 +170,13 @@ class MongoQueryParser():
 
     @staticmethod
     def _retrieve_ops_tree(splits:list, open_splits:list=None, close_splits:list=None):
+        """
+        Retrieves the ops tree from a split query.
+        :param splits: split segments from the query.
+        :param open_splits: token that specifies the open of the splits, forwarded to the 'do_split' function.
+        :param close_splits: token that specifies the close of the splits, forwarded to the 'do_split' function.
+        :return:
+        """
         second_level_operators = ["and", "or"]
 
         operators = {operator: [] for operator in second_level_operators+ [None]}
@@ -166,7 +204,7 @@ class MongoQueryParser():
             if len(previous_oper) > 1:
                 previous_oper = MongoQueryParser._retrieve_ops2_tree(previous_oper)
             else:
-                previous_oper = MongoQueryParser._retrieve_ops_tree(previous_oper)
+                previous_oper = MongoQueryParser._retrieve_ops_tree(MongoQueryParser._do_split(previous_oper[0], open_splits=open_splits, close_splits=close_splits))
 
             operators[last_operand].append(previous_oper)
 
@@ -174,6 +212,13 @@ class MongoQueryParser():
 
     @staticmethod
     def _to_mongo_query_list(ops_list:list):
+        """
+        Converts a list of operations into a Mongo query.
+        This method is recursively called by the method _to_mongo_query_dict() if it finds any
+
+        :param ops_list: list of mongo operations to convert.
+        :return: Mongo query.
+        """
 
         [operation, operand1, operand2] = ops_list
         operand1 = operand1[0]
@@ -196,16 +241,30 @@ class MongoQueryParser():
         elif operation == "<=":
             result[operand1] = {"$lt": float(operand2)+1}
         elif operation == ">=":
-            result[operand1] = {"$lt": float(operand2)-1}
+            result[operand1] = {"$gt": float(operand2)-1}
         elif operation == "%":
             result[operand1] = {"$regex": operand2}
+        elif operation == "!%":
+            result[operand1] = {"$not": re.compile(operand2)}
         elif operation == "in":
-            result[operand1] = {"$in": MongoQueryParser._do_split(operand2[1:-1], separator="", open_splits=["'"], close_splits=["'"])}
+            splits = MongoQueryParser._do_split(operand2[1:-1], separator="", open_splits=["'"], close_splits=["'"])
+            if len(splits) == 1:
+                try:
+                    splits = [float(x) for x in MongoQueryParser._do_split(operand2[1:-1], separator=",")]
+                except:
+                    pass
+
+            result[operand1] = {"$in": splits}
 
         return result
 
     @staticmethod
     def _to_mongo_query_dict(ops_dict):
+        """
+        Converts an ops tree into a Mongo query.
+        :param ops_dict: Ops tree, extracted from the _retrieve_ops_tree()
+        :return: Mongo query.
+        """
 
         ors = ops_dict['or']
         ands = ops_dict['and']
@@ -246,10 +305,3 @@ class MongoQueryParser():
 
 
 
-m = MongoQueryParser()
-print(m.transform_request("val.hola != 44 or (val.hola > 33 and val.hola < 44)"))
-print(m.transform_request("val.hola != 44"))
-print(m.transform_request("val.hola % 'hello  asde'"))
-print(m.transform_request("val.hola = 35"))
-print(m.transform_request("key in ['hello', 'value']"))
-print(m.transform_request("val.hola = 35 and key in ['hello', 'value']"))
