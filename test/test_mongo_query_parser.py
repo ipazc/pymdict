@@ -1,7 +1,7 @@
 import re
 import unittest
 
-from poc.mongo_query_parser import MongoQueryParser
+from pymdict.mongo_query_parser import MongoQueryParser
 
 
 class MongoQueryParserTests(unittest.TestCase):

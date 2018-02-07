@@ -1,8 +1,10 @@
-from poc.mongo_query_parser import MongoQueryParser
+from pymdict.mongo_dict import MongoDict, ForkedMongoDict
 
-m = MongoQueryParser()
-print(m._do_split("val.hola = 22 and (val.pepe > 44 or val.juan < 44)", open_splits=["(", "[", "'"], close_splits=[")", "]", "'"],
-          special_separators="["))
+m = MongoDict("a", mongo_host="172.17.0.1", mongo_port=27015)
 
-print(m._do_split("(val.pepe > 44 or val.juan < 44) and val.hola = 22", open_splits=["(", "[", "'"], close_splits=[")", "]", "'"],
-          special_separators="["))
+m2 = ForkedMongoDict(m, original_dict_id="c", mongo_host="172.17.0.1", mongo_port=27015)
+
+print(m['example2'])
+print(m2['example2'])
+m['example2'] = {'hi': 62}
+print(m2['example2'])

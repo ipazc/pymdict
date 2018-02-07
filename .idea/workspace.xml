@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/poc/argparser.py" line="355" mnemonic="1" />
-    <bookmark url="file://$PROJECT_DIR$/poc/argparser.py" line="310" mnemonic="2" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="2c5cb768-ff8c-4a0e-a3ba-29e7619dd963" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/rdict.iml" afterPath="$PROJECT_DIR$/.idea/rdict.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/poc/argparser.py" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/poc/__init__.py" afterPath="$PROJECT_DIR$/pymdict/__init__.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/poc/mongo_query_parser.py" afterPath="$PROJECT_DIR$/pymdict/mongo_query_parser.py" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/poc/remotedict.py" afterPath="$PROJECT_DIR$/pymdict/mongo_dict.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/poc/mongo_query_parser.py" afterPath="$PROJECT_DIR$/poc/mongo_query_parser.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/poc/remotedict.py" afterPath="$PROJECT_DIR$/poc/remotedict.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/debug.py" afterPath="$PROJECT_DIR$/debug.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/test_mongo_query_parser.py" afterPath="$PROJECT_DIR$/test/test_mongo_query_parser.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +19,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="remotedict.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+      <file leaf-file-name="mongo_dict.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1374">
-              <caret line="26" column="49" lean-forward="true" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
+            <state relative-caret-position="216">
+              <caret line="283" column="15" lean-forward="true" selection-start-line="283" selection-start-column="15" selection-end-line="283" selection-end-column="15" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
               </folding>
@@ -43,23 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="argparser.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/poc/argparser.py">
+      <file leaf-file-name="mongo_query_parser.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pymdict/mongo_query_parser.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="311">
-              <caret line="369" column="0" lean-forward="false" selection-start-line="364" selection-start-column="0" selection-end-line="369" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mongo_query_parser.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/poc/mongo_query_parser.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1485">
-              <caret line="18" column="54" lean-forward="true" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+            <state relative-caret-position="75">
+              <caret line="227" column="0" lean-forward="true" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -80,18 +66,8 @@
       <file leaf-file-name="debug.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/debug.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="collection.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="239">
-              <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
+            <state relative-caret-position="75">
+              <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -115,6 +91,7 @@
       <find>do_split</find>
       <find>print</find>
       <find>UpdateOn</find>
+      <find>bulk</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -125,10 +102,12 @@
       <list>
         <option value="$PROJECT_DIR$/argparser.py" />
         <option value="$PROJECT_DIR$/poc/argparser.py" />
-        <option value="$PROJECT_DIR$/debug.py" />
         <option value="$PROJECT_DIR$/poc/mongo_query_parser.py" />
         <option value="$PROJECT_DIR$/test/test_mongo_query_parser.py" />
         <option value="$PROJECT_DIR$/poc/remotedict.py" />
+        <option value="$PROJECT_DIR$/pymdict/remotedict.py" />
+        <option value="$PROJECT_DIR$/debug.py" />
+        <option value="$PROJECT_DIR$/pymdict/mongo_dict.py" />
       </list>
     </option>
   </component>
@@ -164,7 +143,7 @@
             <path>
               <item name="rdict" type="b2602c69:ProjectViewProjectNode" />
               <item name="rdict" type="462c0819:PsiDirectoryNode" />
-              <item name="poc" type="462c0819:PsiDirectoryNode" />
+              <item name="pymdict" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="rdict" type="b2602c69:ProjectViewProjectNode" />
@@ -193,7 +172,43 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.remotedict">
+  <component name="RunManager" selected="Python.debug">
+    <configuration name="Doctests in MongoDict" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pymdict" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rdict" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pymdict/mongo_dict.py" />
+      <option name="CLASS_NAME" value="MongoDict" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_CLASS" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+    </configuration>
+    <configuration name="Doctests in mongo_dict" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/pymdict" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="rdict" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pymdict/mongo_dict.py" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+    </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -259,23 +274,6 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <configuration name="argparser (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/notebook/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/poc" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="rdict" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poc/argparser.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
     <configuration name="debug" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -289,23 +287,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="rdict" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/debug.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-    </configuration>
-    <configuration name="mongo_query_parser" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="$USER_HOME$/notebook/bin/python" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/poc" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="rdict" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/poc/mongo_query_parser.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -346,18 +327,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.remotedict" />
-      <item index="1" class="java.lang.String" itemvalue="Python.argparser (1)" />
-      <item index="2" class="java.lang.String" itemvalue="Python.mongo_query_parser" />
-      <item index="3" class="java.lang.String" itemvalue="Python.test_mongo_query_parser" />
-      <item index="4" class="java.lang.String" itemvalue="Python.debug" />
+      <item index="1" class="java.lang.String" itemvalue="Python.test_mongo_query_parser" />
+      <item index="2" class="java.lang.String" itemvalue="Python.debug" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Doctests in mongo_dict" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Doctests in MongoDict" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.remotedict" />
-        <item index="1" class="java.lang.String" itemvalue="Python.test_mongo_query_parser" />
-        <item index="2" class="java.lang.String" itemvalue="Python.debug" />
-        <item index="3" class="java.lang.String" itemvalue="Python.mongo_query_parser" />
-        <item index="4" class="java.lang.String" itemvalue="Python.argparser (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Python.debug" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Doctests in MongoDict" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Doctests in mongo_dict" />
+        <item index="3" class="java.lang.String" itemvalue="Python.remotedict" />
+        <item index="4" class="java.lang.String" itemvalue="Python.test_mongo_query_parser" />
       </list>
     </recent_temporary>
   </component>
@@ -373,6 +354,14 @@
       <updated>1517414807529</updated>
     </task>
     <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="Doctests_in_MongoDict - 2018.02.07 at 12h 11m 29s.xml">
+      <configuration name="Doctests in MongoDict" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Doctests_in_mongo_dict - 2018.02.07 at 12h 10m 58s.xml">
+      <configuration name="Doctests in mongo_dict" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
@@ -416,34 +405,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/poc/remotedict.py</url>
-          <line>37</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/argparser.py</url>
           <line>4</line>
           <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/poc/argparser.py</url>
-          <line>68</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/poc/argparser.py</url>
-          <line>132</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/poc/argparser.py</url>
-          <line>372</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/poc/argparser.py</url>
-          <line>187</line>
-          <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/test/test_mongo_query_parser.py</url>
@@ -451,20 +415,20 @@
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/debug.py</url>
-          <line>6</line>
-          <option name="timeStamp" value="28" />
+          <url>file://$PROJECT_DIR$/pymdict/mongo_dict.py</url>
+          <line>326</line>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="29" />
+      <option name="time" value="31" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -490,7 +454,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
@@ -500,17 +464,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/poc/argparser.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/argparser.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="351">
           <caret line="57" column="55" lean-forward="true" selection-start-line="57" selection-start-column="55" selection-end-line="57" selection-end-column="55" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -536,7 +498,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
@@ -547,7 +509,7 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/argparser.py" />
-    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -557,7 +519,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -570,22 +532,6 @@
     <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py" />
     <entry file="file://$PROJECT_DIR$/argparser.py" />
     <entry file="file:///usr/lib/python3/dist-packages/apport_python_hook.py" />
-    <entry file="file://$USER_HOME$/notebook/lib/python3.4/codecs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="308" column="0" lean-forward="false" selection-start-line="308" selection-start-column="0" selection-end-line="308" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.4/json/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="261">
@@ -594,47 +540,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/poc/argparser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="311">
-          <caret line="369" column="0" lean-forward="false" selection-start-line="364" selection-start-column="0" selection-end-line="369" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///usr/lib/python3.4/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="576" column="0" lean-forward="false" selection-start-line="576" selection-start-column="0" selection-end-line="576" selection-end-column="0" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/debug.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="0" lean-forward="false" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/local/lib/python3.4/dist-packages/pymongo/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="99" column="40" lean-forward="false" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/poc/remotedict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1374">
-          <caret line="26" column="49" lean-forward="true" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -648,11 +558,69 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/poc/mongo_query_parser.py">
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_query_parser.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1485">
-          <caret line="18" column="54" lean-forward="true" selection-start-line="18" selection-start-column="54" selection-end-line="18" selection-end-column="54" />
+        <state relative-caret-position="75">
+          <caret line="227" column="0" lean-forward="true" selection-start-line="227" selection-start-column="0" selection-end-line="227" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pymdict/argparser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="277">
+          <caret line="407" column="3" lean-forward="true" selection-start-line="407" selection-start-column="3" selection-end-line="407" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.4/dist-packages/pymongo/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="99" column="40" lean-forward="false" selection-start-line="99" selection-start-column="32" selection-end-line="99" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.4/dist-packages/pymongo/uri_parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="44">
+          <caret line="83" column="0" lean-forward="false" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/notebook/lib/python3.4/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="317" column="0" lean-forward="false" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/facerec/lib/python3.4/site-packages/pymongo/collection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="682" column="0" lean-forward="false" selection-start-line="682" selection-start-column="0" selection-end-line="682" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/debug.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="283" column="15" lean-forward="true" selection-start-line="283" selection-start-column="15" selection-end-line="283" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
