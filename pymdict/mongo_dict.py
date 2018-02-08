@@ -1,4 +1,5 @@
 from contextlib import contextmanager
+from functools import partial
 from time import sleep
 
 import pymongo
@@ -153,6 +154,7 @@ class BasicMongoDict():
         :param key: item key to set.
         :param value: value to set for the item.
         """
+        self._on_modified_callback()
         self._instance.replace_one({'key': key},  {'key': key, 'value': value}, upsert=True)
 
     @contextmanager
@@ -170,6 +172,7 @@ class BasicMongoDict():
                     they must be buffered.
         :return: context manager for the write and delete bulk operations.
         """
+        self._on_modified_callback()
         m = BulkMongoDict(self._original_dict_id, mongo_host=self._mongo_host, mongo_port=self._mongo_port,
                           buffer_size=buffer_size)
         yield m
@@ -209,6 +212,7 @@ class BasicMongoDict():
             yield x['key']
 
     def __delitem__(self, key):
+        self._on_modified_callback()
         self._instance.remove({'key': key})
 
     def items(self):
@@ -244,6 +248,10 @@ class BasicMongoDict():
     def last_element_id(self):
         return list(self._instance.find().sort("_id", pymongo.DESCENDING).limit(1))[0]['_id']
 
+    def _on_modified_callback(self):
+        pass
+
+
 class MongoDict(BasicMongoDict):
     """
     This dictionary is special: keeps track of itself in a special collection ___MONGO_DICT_META___
@@ -256,12 +264,29 @@ class MongoDict(BasicMongoDict):
         self._version = version
         self._load_version(version)
 
-    def _load_version(self, version):
+    def _on_modified_callback(self):
         dict_meta = BasicMongoDict(original_dict_id=___MONGO_DICT_META___, mongo_host=self._mongo_host,
                                    mongo_port=self._mongo_port,
                                    mongo_database=self._mongo_database, credentials=self._credentials)
 
         metadata = dict_meta[self._original_dict_id]
+        metadata.update({'modified': True})
+        dict_meta[self._original_dict_id] = metadata
+
+    def _load_version(self, version=None):
+        """
+        Loads a specific version of this dict.
+        :param version: version to load (int number from 0 to N). If None specified, it will load the latest version.
+        """
+        dict_meta = BasicMongoDict(original_dict_id=___MONGO_DICT_META___, mongo_host=self._mongo_host,
+                                   mongo_port=self._mongo_port,
+                                   mongo_database=self._mongo_database, credentials=self._credentials)
+
+        try:
+            metadata = dict_meta[self._original_dict_id]
+        except KeyError:
+            metadata = {'version': [], 'modified': True}
+            dict_meta[self._original_dict_id] = metadata
 
         if version is None:
             # we pick last version
@@ -270,19 +295,78 @@ class MongoDict(BasicMongoDict):
             else:
                 self._version = metadata['version'][-1]
 
-        self._instance = self._storage[self._original_dict_id+"v{}".format(self._version)]
-        self._instance.create_index([('key', pymongo.TEXT)], name='key_index')
+        else:
+            self._version = version
 
-    def _save_dict_meta(self):
+        if self._version > 0:
+            self._morph_into_fork(MongoDict(original_dict_id=self._original_dict_id, mongo_host=self._mongo_host,
+                                            mongo_port=self._mongo_port, mongo_database=self._mongo_database,
+                                            credentials=self._credentials, version=self._version-1))
+        elif 'ancestor_fork' in metadata:
+            self._morph_into_fork(MongoDict(original_dict_id=metadata['ancestor_fork'], mongo_host=self._mongo_host,
+                                            mongo_port=self._mongo_port, mongo_database=self._mongo_database,
+                                            credentials=self._credentials, version=metadata['ancestor_version']))
+        """else:
+            self._instance = self._storage[self._original_dict_id + "v{}".format(self._version)]
+            self._instance.create_index([('key', pymongo.TEXT)], name='key_index')
+        """
+
+    """
+    def _thread_checker(self):
         dict_meta = BasicMongoDict(original_dict_id=___MONGO_DICT_META___, mongo_host=self._mongo_host,
                                    mongo_port=self._mongo_port,
                                    mongo_database=self._mongo_database, credentials=self._credentials)
 
-    def _thread_checker(self):
-
         while not self._exit:
-            if
+            if dict_meta[self._original_dict_id]['version'][-1] != self._version:
+                self._load_version()
             sleep(1)
+    """
+
+    def _morph_into_fork(self, father):
+        """
+        Morphs this dictionary into a fork dictionary class, if it is not already one.
+        :param father: father of this fork.
+        :return:
+        """
+        if type(self) is not ForkedMongoDict:
+            self.__class__ = ForkedMongoDict
+
+            # Now we map relevant functions
+            self.__contains__ = partial(ForkedMongoDict.__contains__, self)
+            self.__str__ = partial(ForkedMongoDict.__str__, self)
+            self.__repr__ = partial(ForkedMongoDict.__repr__, self)
+            self.__len__ = partial(ForkedMongoDict.__len__, self)
+            self.__getitem__ = partial(ForkedMongoDict.__getitem__, self)
+            self.__delitem__ = partial(ForkedMongoDict.__delitem__, self)
+            self.bulk = partial(ForkedMongoDict.bulk, self)
+            self._fork_father = father
+
+        self._instance = self._storage[self._original_dict_id+"v{}".format(self._version)]
+        self._instance.create_index([('key', pymongo.TEXT)], name='key_index')
+
+    def fork(self, new_id=str(ObjectId())):
+        if new_id == self._original_dict_id:
+            raise Exception("Fork cannot override father's ID")
+
+        dict_meta = BasicMongoDict(original_dict_id=___MONGO_DICT_META___, mongo_host=self._mongo_host,
+                                   mongo_port=self._mongo_port,
+                                   mongo_database=self._mongo_database, credentials=self._credentials)
+
+        metadata = dict_meta[self._original_dict_id]
+
+        if metadata['modified']:
+            metadata['version'].append(self._version + 1)
+            metadata['modified'] = False
+            dict_meta[self._original_dict_id] = metadata
+
+        result = ForkedMongoDict(self, new_id, mongo_host=self._mongo_host, mongo_port=self._mongo_port,
+                                 mongo_database=self._mongo_database, credentials=self._credentials)
+
+        # Reload the latest version
+        self._load_version()
+
+        return result
 
 
 class ForkedMongoDict(MongoDict):
@@ -290,11 +374,21 @@ class ForkedMongoDict(MongoDict):
     Dictionary that allows to work with an existing dict without overriding it.
     """
 
-    def __init__(self, father:BasicMongoDict, original_dict_id:str=str(ObjectId()), mongo_host:str="localhost", mongo_port:int=27017,
-                 mongo_database="mongo_dicts", credentials:tuple=None):
+    def __init__(self, father:MongoDict, original_dict_id:str=str(ObjectId()), mongo_host:str="localhost", mongo_port:int=27017,
+                 mongo_database="mongo_dicts", credentials:tuple=None, version=None):
         MongoDict.__init__(self, original_dict_id=original_dict_id, mongo_host=mongo_host, mongo_port=mongo_port,
-                           mongo_database=mongo_database, credentials=credentials)
-        self.fork_father = father
+                           mongo_database=mongo_database, credentials=credentials, version=version)
+        self._fork_father = MongoDict(father._original_dict_id, version=father._version, mongo_host=father._mongo_host,
+                                      mongo_port=father._mongo_port, mongo_database=father._mongo_database,
+                                      credentials=father._credentials)
+        dict_meta = BasicMongoDict(original_dict_id=___MONGO_DICT_META___, mongo_host=self._mongo_host,
+                                   mongo_port=self._mongo_port,
+                                   mongo_database=self._mongo_database, credentials=self._credentials)
+
+        metadata = dict_meta[self._original_dict_id]
+        metadata['ancestor_fork'] = father._original_dict_id
+        metadata['ancestor_version'] = father._version
+        dict_meta[self._original_dict_id] = metadata
 
     def __contains__(self, item):
         """
@@ -306,28 +400,36 @@ class ForkedMongoDict(MongoDict):
         i = self._instance.find_one({'key': item})
 
         if i is None:
-            return item in self.fork_father
+            return item in self._fork_father
         else:
             return "___removed" in i
 
+    def keys(self):
+        current_keys = list(self._instance.find())
+        removed_keys = [k['key'] for k in current_keys if '___removed' in k]
+
+        father_keys = self._fork_father.keys()
+        total_keys = father_keys + [k['key'] for k in current_keys]
+        return [r for r in total_keys if r not in removed_keys]
+
     def __str__(self):
-        return "Mongo_Dict ({}) -- father: {}".format(self._original_dict_id, self.fork_father)
+        return "Mongo_Dict ({}) -- father: {} (v{})".format(self._original_dict_id, self._fork_father, self._fork_father._version)
 
     def __repr__(self):
-        return "Mongo_Dict ({}) -- father: {}".format(self._original_dict_id, self.fork_father)
+        return "Mongo_Dict ({}) -- father: {} (v{})".format(self._original_dict_id, self._fork_father, self._fork_father._version)
 
     def __len__(self):
         size = self._instance.find({'$and':
-                                        [{'_id': {'$gt': self.fork_father.last_element_id()}},
+                                        [{'_id': {'$gt': self._fork_father.last_element_id()}},
                                          {'___removed': {'$ne': 1}}]}).count()
-        return len(self.fork_father) + size
+        return len(self._fork_father) + size
 
     def __getitem__(self, item):
         try:
             result = MongoDict.__getitem__(self, item)
         except KeyError:
             try:
-                result = self.fork_father[item]
+                result = self._fork_father[item]
             except KeyError as e:
                 raise e from None
 
@@ -337,6 +439,7 @@ class ForkedMongoDict(MongoDict):
         return result
 
     def __delitem__(self, key):
+        self._on_modified_callback()
         self._instance.replace_one({'key': key}, {'key': key, 'value': None, '___removed': 1}, upsert=True)
 
     @contextmanager
@@ -358,6 +461,7 @@ class ForkedMongoDict(MongoDict):
                                 mongo_port=self._mongo_port, mongo_database=self._mongo_database,
                                 credentials=self._credentials, buffer_size=buffer_size)
         yield m
+        self._on_modified_callback()
         m.commit()
 
 
@@ -373,6 +477,7 @@ class BulkMongoDict(MongoDict):
         self._operations = []
 
     def __setitem__(self, key, value):
+        self._on_modified_callback()
         self._operations.append(
             UpdateOne({"key": key}, {"$set": {"value": value}}, upsert=True)
         )
@@ -381,6 +486,7 @@ class BulkMongoDict(MongoDict):
             self.commit()
 
     def __delitem__(self, key):
+        self._on_modified_callback()
         self._operations.append(
             DeleteOne({"key": key})
         )
@@ -397,9 +503,11 @@ class BulkMongoDict(MongoDict):
                 print("Could not write the bulk operations: {}".format(ex.details))
                 raise
 
+
 class BulkMongoDictForked(BulkMongoDict):
 
     def __delitem__(self, key):
+        self._on_modified_callback()
         self._operations.append(
             UpdateOne({"key": key}, {"$set": {"value": None, "___removed": 1}}, upsert=True)
         )
