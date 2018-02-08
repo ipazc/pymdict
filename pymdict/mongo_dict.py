@@ -251,6 +251,9 @@ class BasicMongoDict():
     def _on_modified_callback(self):
         pass
 
+    def _drop(self):
+        self._instance.drop()
+
 
 class MongoDict(BasicMongoDict):
     """
@@ -306,10 +309,7 @@ class MongoDict(BasicMongoDict):
             self._morph_into_fork(MongoDict(original_dict_id=metadata['ancestor_fork'], mongo_host=self._mongo_host,
                                             mongo_port=self._mongo_port, mongo_database=self._mongo_database,
                                             credentials=self._credentials, version=metadata['ancestor_version']))
-        """else:
-            self._instance = self._storage[self._original_dict_id + "v{}".format(self._version)]
-            self._instance.create_index([('key', pymongo.TEXT)], name='key_index')
-        """
+
 
     """
     def _thread_checker(self):
@@ -339,10 +339,11 @@ class MongoDict(BasicMongoDict):
             self.__len__ = partial(ForkedMongoDict.__len__, self)
             self.__getitem__ = partial(ForkedMongoDict.__getitem__, self)
             self.__delitem__ = partial(ForkedMongoDict.__delitem__, self)
+            self.__call__ = partial(ForkedMongoDict.__call__, self)
             self.bulk = partial(ForkedMongoDict.bulk, self)
             self._fork_father = father
 
-        self._instance = self._storage[self._original_dict_id+"v{}".format(self._version)]
+        self._instance = self._storage[self._original_dict_id+("v{}".format(self._version) if self._version > 0 else "")]
         self._instance.create_index([('key', pymongo.TEXT)], name='key_index')
 
     def fork(self, new_id=str(ObjectId())):
@@ -459,10 +460,56 @@ class ForkedMongoDict(MongoDict):
         """
         m = BulkMongoDictForked(original_dict_id=self._original_dict_id, mongo_host=self._mongo_host,
                                 mongo_port=self._mongo_port, mongo_database=self._mongo_database,
-                                credentials=self._credentials, buffer_size=buffer_size)
+                                credentials=self._credentials, buffer_size=buffer_size, version=self._version)
         yield m
         self._on_modified_callback()
         m.commit()
+
+    def __call__(self, query:str, count_only:bool=False):
+        """
+        Performs a query over the dictionary. It uses a simple query.
+        :param query: string query to perform
+        :param count_only: if set to true, it will return the length of the query result.
+        :return: iterator for the elements that satisfies the query, or the size of the elements set if count_only
+        param is true.
+        """
+
+        RETRIEVE_BUFFER = 500
+        # We perform a call this way we run through each element:
+
+        m = MongoQueryParser()
+        mongo_query = m.transform_request(query)
+        mongo_query_for_removed = {'___removed': 1}
+        mongo_query_for_edited_added = {'$and': [mongo_query, {'___removed': None}]}
+
+        mongo_cursor_removed = self._instance.find(mongo_query_for_removed, {'key': 1, '_id': 0})
+        mongo_cursor_edited = self._instance.find(mongo_query_for_edited_added)
+
+        if count_only:
+            return self._fork_father(query, count_only=True) - mongo_cursor_removed.count() + mongo_cursor_edited.count()
+        else:
+
+            mongo_used = set()
+
+            # First we yield the edited and added
+            for result in mongo_cursor_edited:
+                mongo_used.add(result['key'])
+                yield result['key'], result['value'], result['_id']
+
+                # Meanwhile we get RETRIEVE_BUFFER of removed elements
+                for index, removed in zip(range(RETRIEVE_BUFFER), mongo_cursor_removed):
+                    mongo_used.add(removed['key'])
+
+            # Let's add the rest of the removed elements (if any yet) to the set
+            for removed in mongo_cursor_removed:
+                mongo_used.add(removed['key'])
+
+            # Then we yield from the father's if it is not in the used list,
+            mongo_cursor = self._fork_father(query)
+
+            for key, value, _id in mongo_cursor:
+                if key not in mongo_used:
+                    yield key, value, _id
 
 
 class BulkMongoDict(MongoDict):
@@ -470,10 +517,11 @@ class BulkMongoDict(MongoDict):
     Dictionary that allows bulk operations on a mongo dictionary.
     """
     def __init__(self, original_dict_id:str=str(ObjectId()), mongo_host:str="localhost", mongo_port:int=27017,
-                 mongo_database="mongo_dicts", credentials:tuple=None, buffer_size=100):
+                 mongo_database="mongo_dicts", credentials:tuple=None, buffer_size=100, version:int=None):
         self._buffer_size = buffer_size
         MongoDict.__init__(self, original_dict_id=original_dict_id, mongo_host=mongo_host,
-                           mongo_port=mongo_port, mongo_database=mongo_database, credentials=credentials)
+                           mongo_port=mongo_port, mongo_database=mongo_database, credentials=credentials,
+                           version=version)
         self._operations = []
 
     def __setitem__(self, key, value):
@@ -515,3 +563,52 @@ class BulkMongoDictForked(BulkMongoDict):
         if len(self._operations) > self._buffer_size:
             self.commit()
 
+
+class DictDropper():
+    """
+    Warning: this is a class capable of removing dictionaries! it might leave the dict-system in an inconsistent state!
+    use it carefully!
+
+    Why can it leave it in an inconsistent state?
+    =============================================
+    Dictionaries that fork from other dictionaries do not clone the content. Instead, they refer to the content of the
+    original dictionary. If an original dictionary is removed and several forks are pointing to it, the forks will
+    probably lose part of its content.
+    """
+    def __init__(self, mongo_host:str="localhost", mongo_port:int=27017,
+                 mongo_database="mongo_dicts", credentials:tuple=None):
+        self._mongo_host = mongo_host
+        self._mongo_port = mongo_port
+        self._mongo_database = mongo_database
+        self._credentials = credentials
+
+    def drop_dict(self, dict_id, remove_all_versions=True):
+        dict_meta = BasicMongoDict(original_dict_id=___MONGO_DICT_META___, mongo_host=self._mongo_host,
+                                   mongo_port=self._mongo_port,
+                                   mongo_database=self._mongo_database, credentials=self._credentials)
+
+        metadata = dict_meta[dict_id]
+
+        versions = metadata['versions']
+
+        if remove_all_versions:
+            for version in versions:
+                BasicMongoDict(original_dict_id="{}v{}".format(dict_id, version), mongo_host=self._mongo_host,
+                               mongo_port=self._mongo_port, mongo_database=self._mongo_database,
+                               credentials=self._credentials)._drop()
+
+            BasicMongoDict(original_dict_id=dict_id, mongo_host=self._mongo_host,
+                           mongo_port=self._mongo_port,
+                           mongo_database=self._mongo_database, credentials=self._credentials)._drop()
+            del dict_meta[dict_id]
+        else:
+            MongoDict(original_dict_id=dict_id, mongo_host=self._mongo_host, mongo_port=self._mongo_port,
+                      mongo_database=self._mongo_database, credentials=self._credentials)._drop()
+
+            if len(metadata['versions']) > 0:
+                metadata['versions'] = metadata['versions'][:-1]
+                dict_meta[dict_id] = metadata
+            else:
+                del dict_meta[dict_id]
+
+        return len(versions) + 1

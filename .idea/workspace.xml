@@ -17,10 +17,22 @@
       <file leaf-file-name="mongo_dict.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="407" column="0" lean-forward="false" selection-start-line="407" selection-start-column="0" selection-end-line="407" selection-end-column="0" />
+            <state relative-caret-position="231">
+              <caret line="491" column="23" lean-forward="true" selection-start-line="491" selection-start-column="23" selection-end-line="491" selection-end-column="23" />
               <folding>
                 <element signature="e#0#37#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test_pymdict.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/test_pymdict.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+              <folding>
+                <element signature="e#0#9#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -71,8 +83,8 @@
       <file leaf-file-name="debug.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/debug.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+            <state relative-caret-position="180">
+              <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -113,6 +125,7 @@
         <option value="$PROJECT_DIR$/poc/remotedict.py" />
         <option value="$PROJECT_DIR$/pymdict/remotedict.py" />
         <option value="$PROJECT_DIR$/debug2.py" />
+        <option value="$PROJECT_DIR$/test/test_pymdict.py" />
         <option value="$PROJECT_DIR$/debug.py" />
         <option value="$PROJECT_DIR$/pymdict/mongo_dict.py" />
       </list>
@@ -167,6 +180,11 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -216,7 +234,7 @@
       <option name="PATTERN" value="" />
       <option name="USE_PATTERN" value="false" />
     </configuration>
-    <configuration name="Doctests in mongo_dict" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
+    <configuration name="Doctests in mongo_dict (1)" type="tests" factoryName="Doctests" temporary="true" nameIsGenerated="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs />
@@ -335,18 +353,18 @@
     </configuration>
     <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.debug" />
-      <item index="1" class="java.lang.String" itemvalue="Python tests.Doctests in mongo_dict" />
-      <item index="2" class="java.lang.String" itemvalue="Python tests.Doctests in MongoDict" />
-      <item index="3" class="java.lang.String" itemvalue="Python.debug2" />
-      <item index="4" class="java.lang.String" itemvalue="Python tests.Doctests in ForkedMongoDict" />
+      <item index="1" class="java.lang.String" itemvalue="Python tests.Doctests in MongoDict" />
+      <item index="2" class="java.lang.String" itemvalue="Python.debug2" />
+      <item index="3" class="java.lang.String" itemvalue="Python tests.Doctests in ForkedMongoDict" />
+      <item index="4" class="java.lang.String" itemvalue="Python tests.Doctests in mongo_dict (1)" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="Python.debug" />
-        <item index="1" class="java.lang.String" itemvalue="Python tests.Doctests in ForkedMongoDict" />
-        <item index="2" class="java.lang.String" itemvalue="Python.debug2" />
-        <item index="3" class="java.lang.String" itemvalue="Python tests.Doctests in MongoDict" />
-        <item index="4" class="java.lang.String" itemvalue="Python tests.Doctests in mongo_dict" />
+        <item index="1" class="java.lang.String" itemvalue="Python tests.Doctests in mongo_dict (1)" />
+        <item index="2" class="java.lang.String" itemvalue="Python tests.Doctests in ForkedMongoDict" />
+        <item index="3" class="java.lang.String" itemvalue="Python.debug2" />
+        <item index="4" class="java.lang.String" itemvalue="Python tests.Doctests in MongoDict" />
       </list>
     </recent_temporary>
   </component>
@@ -373,6 +391,9 @@
     <history-entry file="Doctests_in_mongo_dict - 2018.02.07 at 12h 10m 58s.xml">
       <configuration name="Doctests in mongo_dict" configurationId="tests" />
     </history-entry>
+    <history-entry file="Doctests_in_mongo_dict_(1) - 2018.02.08 at 19h 50m 52s.xml">
+      <configuration name="Doctests in mongo_dict (1)" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1366" height="768" extended-state="0" />
@@ -382,7 +403,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32917318" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -427,19 +448,24 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/debug.py</url>
-          <line>29</line>
-          <option name="timeStamp" value="36" />
+          <line>24</line>
+          <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/pymdict/mongo_dict.py</url>
-          <line>407</line>
-          <option name="timeStamp" value="39" />
+          <url>file://$PROJECT_DIR$/debug.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/debug.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="40" />
+      <option name="time" value="44" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -614,14 +640,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/debug2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/notebook/lib/python3.4/codecs.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="328">
@@ -630,18 +648,44 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/debug2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="34" lean-forward="false" selection-start-line="12" selection-start-column="34" selection-end-line="12" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///usr/local/lib/python3.4/dist-packages/pymongo/helpers.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="143" column="44" lean-forward="true" selection-start-line="143" selection-start-column="44" selection-end-line="143" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/debug.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="21" column="0" lean-forward="false" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+        <state relative-caret-position="180">
+          <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/test_pymdict.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="29" lean-forward="true" selection-start-line="11" selection-start-column="29" selection-end-line="11" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pymdict/mongo_dict.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="407" column="0" lean-forward="false" selection-start-line="407" selection-start-column="0" selection-end-line="407" selection-end-column="0" />
+        <state relative-caret-position="231">
+          <caret line="491" column="23" lean-forward="true" selection-start-line="491" selection-start-column="23" selection-end-line="491" selection-end-column="23" />
           <folding>
             <element signature="e#0#37#0" expanded="true" />
           </folding>
