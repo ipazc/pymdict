@@ -56,6 +56,8 @@ class MongoQueryParser():
 
         :return: JSON query for a MongoDB
         """
+        if str_query == "":
+            return {}
 
         splits = self._do_split(str_query, open_splits=["(", "[", "'"], close_splits=[")", "]", "'"],
                                 special_separators="[")

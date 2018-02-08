@@ -1,4 +1,4 @@
-from pymdict.mongo_dict import MongoDict, BasicMongoDict
+from pymdict.mongo_dict import MongoDict
 
 m = MongoDict("r2d2", mongo_host="172.17.0.1", mongo_port=27015)
 
@@ -10,7 +10,7 @@ any = MongoDict("any", mongo_host="172.17.0.1", mongo_port=27015)
 any['hi'] = "ha"
 del any['hi']
 
-for x in any("value % h"):
+for x in any(""):
     print(x)
 
 """
