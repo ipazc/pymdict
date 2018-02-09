@@ -92,7 +92,7 @@ class BasicMongoDict():
         For more information about queries, visit this wiki page: [TODO]
     """
 
-    def __init__(self, original_dict_id:str=str(ObjectId()), mongo_host:str="localhost", mongo_port:int=27017,
+    def __init__(self, original_dict_id:str=None, mongo_host:str="localhost", mongo_port:int=27017,
                  mongo_database="mongo_dicts", credentials:tuple=None):
         """
         Instantiates the dictionary back-ended in mongo
@@ -104,6 +104,9 @@ class BasicMongoDict():
         :param mongo_database:  database name of the mongo db. By default it will use "mongo_dicts"
         :param credentials: tuple containing the user and password. Leave it as None if no credentials are required.
         """
+
+        if original_dict_id is None:
+            original_dict_id = str(ObjectId())
 
         mongo_uri = "mongodb://"
 
@@ -137,16 +140,19 @@ class BasicMongoDict():
 
         if type(item) is tuple:
             item = item[0]
-            extract_id = 1
+            result = self._instance.find_one({'key': item})
+
+            if result is None:
+                raise KeyError(item)
         else:
-            extract_id = 0
 
-        result = self._instance.find_one({'key': item}, {'_id': extract_id, 'value':1})
+            result = self._instance.find_one({'key': item}, {'_id': 0, 'value': 1})
+            if result is None:
+                raise KeyError(item)
 
-        if result is None:
-            raise KeyError(item)
+            result = result['value']
 
-        return result['value']
+        return result
 
     def __setitem__(self, key, value):
         """
@@ -213,7 +219,7 @@ class BasicMongoDict():
 
     def __delitem__(self, key):
         self._on_modified_callback()
-        self._instance.remove({'key': key})
+        result = self._instance.remove({'key': key})
 
     def items(self):
         for x in self._instance.find({}, {'_id':0, 'key': 1, 'value': 1}):
@@ -246,7 +252,10 @@ class BasicMongoDict():
         self._client.close()
 
     def last_element_id(self):
-        return list(self._instance.find().sort("_id", pymongo.DESCENDING).limit(1))[0]['_id']
+        last_elements = list(self._instance.find().sort("_id", pymongo.DESCENDING).limit(1))
+
+        result = last_elements[0]['_id'] if len(last_elements) > 0 else None
+        return result
 
     def _on_modified_callback(self):
         pass
@@ -254,16 +263,24 @@ class BasicMongoDict():
     def _drop(self):
         self._instance.drop()
 
+    def get_my_id(self):
+        return self._original_dict_id
+
+    def update(self, ext_dict):
+        with self.bulk() as b:
+            for key, value in ext_dict.items():
+                b[key] = value
 
 class MongoDict(BasicMongoDict):
     """
     This dictionary is special: keeps track of itself in a special collection ___MONGO_DICT_META___
     """
-    def __init__(self, original_dict_id:str=str(ObjectId()), mongo_host:str="localhost", mongo_port:int=27017,
-                 mongo_database="mongo_dicts", credentials:tuple=None, version=None):
+    def __init__(self, original_dict_id:str=None, mongo_host:str="localhost", mongo_port:int=27017,
+                 mongo_database="mongo_dicts", credentials:tuple=None, version=None, allow_morph:bool=True):
         BasicMongoDict.__init__(self, original_dict_id=original_dict_id, mongo_host=mongo_host, mongo_port=mongo_port,
                  mongo_database=mongo_database, credentials=credentials)
 
+        self._allow_morph = allow_morph
         self._version = version
         self._load_version(version)
 
@@ -329,24 +346,35 @@ class MongoDict(BasicMongoDict):
         :param father: father of this fork.
         :return:
         """
-        if type(self) is not ForkedMongoDict:
-            self.__class__ = ForkedMongoDict
+        if self._allow_morph:
 
-            # Now we map relevant functions
-            self.__contains__ = partial(ForkedMongoDict.__contains__, self)
-            self.__str__ = partial(ForkedMongoDict.__str__, self)
-            self.__repr__ = partial(ForkedMongoDict.__repr__, self)
-            self.__len__ = partial(ForkedMongoDict.__len__, self)
-            self.__getitem__ = partial(ForkedMongoDict.__getitem__, self)
-            self.__delitem__ = partial(ForkedMongoDict.__delitem__, self)
-            self.__call__ = partial(ForkedMongoDict.__call__, self)
-            self.bulk = partial(ForkedMongoDict.bulk, self)
-            self._fork_father = father
+            if type(self) is not ForkedMongoDict:
+                self.__class__ = ForkedMongoDict
+
+                # Now we map relevant functions
+                self.__contains__ = partial(ForkedMongoDict.__contains__, self)
+                self.__str__ = partial(ForkedMongoDict.__str__, self)
+                self.__repr__ = partial(ForkedMongoDict.__repr__, self)
+                self.__len__ = partial(ForkedMongoDict.__len__, self)
+                self.__getitem__ = partial(ForkedMongoDict.__getitem__, self)
+                self.__delitem__ = partial(ForkedMongoDict.__delitem__, self)
+                self.__call__ = partial(ForkedMongoDict.__call__, self)
+                self.__iter__ = partial(ForkedMongoDict.__iter__, self)
+
+                self.items = partial(ForkedMongoDict.items, self)
+                self.bulk = partial(ForkedMongoDict.bulk, self)
+                self._fork_father = father
+
+            else:
+                self._fork_father = father
 
         self._instance = self._storage[self._original_dict_id+("v{}".format(self._version) if self._version > 0 else "")]
         self._instance.create_index([('key', pymongo.TEXT)], name='key_index')
 
-    def fork(self, new_id=str(ObjectId())):
+    def fork(self, new_id=None):
+        if new_id is None:
+            new_id = str(ObjectId())
+
         if new_id == self._original_dict_id:
             raise Exception("Fork cannot override father's ID")
 
@@ -369,13 +397,34 @@ class MongoDict(BasicMongoDict):
 
         return result
 
+    @contextmanager
+    def bulk(self, buffer_size=100):
+        """
+        Performs a bulk operation over the dictionary. It can be write and/or delete of elements.
+        It is managed by a contextmanager. An example of use is:
+            >>> with dictionary.bulk() as d:
+            ...     d['k1'] = "v1"
+            ...     d['k2'] = "v2"
+            ...     d['k3'] = "v3"
+
+        :param buffer_size: size of the buffer to set for the bulk operation. This size is the threshold at which
+                    the changes are commited to the backend. The reason is that bulk operations are limited in size, so
+                    they must be buffered.
+        :return: context manager for the write and delete bulk operations.
+        """
+        self._on_modified_callback()
+        m = BulkMongoDict(self._original_dict_id, mongo_host=self._mongo_host, mongo_port=self._mongo_port,
+                          buffer_size=buffer_size, version=self._version)
+        yield m
+        m.commit()
+
 
 class ForkedMongoDict(MongoDict):
     """
     Dictionary that allows to work with an existing dict without overriding it.
     """
 
-    def __init__(self, father:MongoDict, original_dict_id:str=str(ObjectId()), mongo_host:str="localhost", mongo_port:int=27017,
+    def __init__(self, father:MongoDict, original_dict_id:str=None, mongo_host:str="localhost", mongo_port:int=27017,
                  mongo_database="mongo_dicts", credentials:tuple=None, version=None):
         MongoDict.__init__(self, original_dict_id=original_dict_id, mongo_host=mongo_host, mongo_port=mongo_port,
                            mongo_database=mongo_database, credentials=credentials, version=version)
@@ -403,14 +452,14 @@ class ForkedMongoDict(MongoDict):
         if i is None:
             return item in self._fork_father
         else:
-            return "___removed" in i
+            return "___removed" not in i
 
     def keys(self):
         current_keys = list(self._instance.find())
-        removed_keys = [k['key'] for k in current_keys if '___removed' in k]
+        removed_keys = set([k['key'] for k in current_keys if '___removed' in k])
 
         father_keys = self._fork_father.keys()
-        total_keys = father_keys + [k['key'] for k in current_keys]
+        total_keys = set(father_keys + [k['key'] for k in current_keys])
         return [r for r in total_keys if r not in removed_keys]
 
     def __str__(self):
@@ -420,22 +469,25 @@ class ForkedMongoDict(MongoDict):
         return "Mongo_Dict ({}) -- father: {} (v{})".format(self._original_dict_id, self._fork_father, self._fork_father._version)
 
     def __len__(self):
-        size = self._instance.find({'$and':
-                                        [{'_id': {'$gt': self._fork_father.last_element_id()}},
-                                         {'___removed': {'$ne': 1}}]}).count()
-        return len(self._fork_father) + size
+        new_elements = self._instance.find({'___removed': None}).count()
+        removed_elements = self._instance.find({'___removed': 1}).count()
+
+        return max(0, len(self._fork_father) - removed_elements) + new_elements
 
     def __getitem__(self, item):
         try:
-            result = MongoDict.__getitem__(self, item)
+            result = MongoDict.__getitem__(self, (item, ))
         except KeyError:
             try:
-                result = self._fork_father[item]
+                result = self._fork_father[(item, )]
             except KeyError as e:
                 raise e from None
 
         if result is None or (result is not None and '___removed' in result):
             raise KeyError(item)
+
+        if type(item) is not tuple:
+            result = result['value']
 
         return result
 
@@ -465,6 +517,14 @@ class ForkedMongoDict(MongoDict):
         self._on_modified_callback()
         m.commit()
 
+    def items(self):
+        for key, value, _id in self(""):
+            yield key, value
+
+    def __iter__(self):
+        for key, _, _ in self(""):
+            yield key
+
     def __call__(self, query:str, count_only:bool=False):
         """
         Performs a query over the dictionary. It uses a simple query.
@@ -486,7 +546,7 @@ class ForkedMongoDict(MongoDict):
         mongo_cursor_edited = self._instance.find(mongo_query_for_edited_added)
 
         if count_only:
-            return self._fork_father(query, count_only=True) - mongo_cursor_removed.count() + mongo_cursor_edited.count()
+            return max(0, self._fork_father(query, count_only=True) - mongo_cursor_removed.count()) + mongo_cursor_edited.count()
         else:
 
             mongo_used = set()
@@ -516,12 +576,12 @@ class BulkMongoDict(MongoDict):
     """
     Dictionary that allows bulk operations on a mongo dictionary.
     """
-    def __init__(self, original_dict_id:str=str(ObjectId()), mongo_host:str="localhost", mongo_port:int=27017,
+    def __init__(self, original_dict_id:str=None, mongo_host:str="localhost", mongo_port:int=27017,
                  mongo_database="mongo_dicts", credentials:tuple=None, buffer_size=100, version:int=None):
         self._buffer_size = buffer_size
         MongoDict.__init__(self, original_dict_id=original_dict_id, mongo_host=mongo_host,
                            mongo_port=mongo_port, mongo_database=mongo_database, credentials=credentials,
-                           version=version)
+                           version=version, allow_morph=False)
         self._operations = []
 
     def __setitem__(self, key, value):
@@ -589,7 +649,7 @@ class DictDropper():
 
         metadata = dict_meta[dict_id]
 
-        versions = metadata['versions']
+        versions = metadata['version']
 
         if remove_all_versions:
             for version in versions:
@@ -605,8 +665,8 @@ class DictDropper():
             MongoDict(original_dict_id=dict_id, mongo_host=self._mongo_host, mongo_port=self._mongo_port,
                       mongo_database=self._mongo_database, credentials=self._credentials)._drop()
 
-            if len(metadata['versions']) > 0:
-                metadata['versions'] = metadata['versions'][:-1]
+            if len(metadata['version']) > 0:
+                metadata['version'] = metadata['version'][:-1]
                 dict_meta[dict_id] = metadata
             else:
                 del dict_meta[dict_id]

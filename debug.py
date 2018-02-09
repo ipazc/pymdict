@@ -1,28 +1,27 @@
-from pymdict.mongo_dict import MongoDict
+from pymdict.mongo_dict import MongoDict, DictDropper
 
-m = MongoDict("r2d2", mongo_host="172.17.0.1", mongo_port=27015)
+m = MongoDict("ex", mongo_host="172.17.0.1", mongo_port=27015)
 
-m['hi'] = "hello"
-m['ho'] = "hola"
+m["test"] = "test"
+m["test2"] = "test2"
 
-#any = m.fork("any")
-any = MongoDict("any", mongo_host="172.17.0.1", mongo_port=27015)
-any['hi'] = "ha"
-del any['hi']
+fork1 = m.fork("fork1")
 
-for x in any(""):
-    print(x)
+fork1['test3'] = 'test3'
 
-"""
-s = MongoDict("any", mongo_host="172.17.0.1", mongo_port=27015)
-s['hi'] = "ha"
+fork2 = fork1.fork("fork2")
 
-#del s['hi']
+print(fork2.keys())
+print(fork1.keys())
+print(m.keys())
 
-for x in m("value % h"):
-    print(x)
+print(fork1)
 
-for x in s("value % h"):
-    print(x)
+d = DictDropper(mongo_host="172.17.0.1", mongo_port=27015)
+d.drop_dict('ex')
+d.drop_dict('fork1')
+d.drop_dict('fork2')
 
-"""
+
+
+
