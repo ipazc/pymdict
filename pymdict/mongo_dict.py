@@ -271,6 +271,7 @@ class BasicMongoDict():
             for key, value in ext_dict.items():
                 b[key] = value
 
+
 class MongoDict(BasicMongoDict):
     """
     This dictionary is special: keeps track of itself in a special collection ___MONGO_DICT_META___
@@ -476,10 +477,10 @@ class ForkedMongoDict(MongoDict):
 
     def __getitem__(self, item):
         try:
-            result = MongoDict.__getitem__(self, (item, ))
+            result = MongoDict.__getitem__(self, (item, ) if type(item) is not tuple else item)
         except KeyError:
             try:
-                result = self._fork_father[(item, )]
+                result = self._fork_father[(item, ) if type(item) is not tuple else item]
             except KeyError as e:
                 raise e from None
 

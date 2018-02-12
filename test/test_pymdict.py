@@ -5,8 +5,9 @@ from bson import ObjectId
 from pymdict.mongo_dict import MongoDict, DictDropper
 
 
-MONGO_HOST = "172.17.0.1"
-MONGO_PORT = 27015
+MONGO_HOST = "localhost"
+MONGO_PORT = 27017
+
 
 class CheckDict():
     
@@ -325,12 +326,13 @@ class ForkedMongoDictTests2(unittest.TestCase):
 class ForkedMongoDictTests3(unittest.TestCase):
 
     def setUp(self):
-        self.original = MongoDict(mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+        self._drop_db()
+        self.original = MongoDict("original", mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
         self.original["val1"] = 55
         self.original["val2"] = "hello"
-        self.fork1 = self.original.fork()
+        self.fork1 = self.original.fork("fork1")
         self.fork1["val3"] = 65
-        self.fork2 = self.fork1.fork()
+        self.fork2 = self.fork1.fork("fork2")
         del self.fork2["val1"]
         del self.fork2["val2"]
         del self.fork2["val3"]
@@ -395,10 +397,18 @@ class ForkedMongoDictTests3(unittest.TestCase):
         test.test_query()
         self._assert_original_kept()
 
+    def _drop_db(self):
+        try:
+            self.dropper = DictDropper(mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+            self.dropper.drop_dict("original")
+            self.dropper.drop_dict("fork1")
+            self.dropper.drop_dict("fork2")
+
+        except:
+            pass
+
     def tearDown(self):
-        self.dropper = DictDropper(mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
-        self.dropper.drop_dict(self.original.get_my_id())
-        self.dropper.drop_dict(self.fork2.get_my_id())
+        self._drop_db()
 
 
 if __name__ == '__main__':
