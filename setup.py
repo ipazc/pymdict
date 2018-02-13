@@ -25,7 +25,7 @@
 
 import sys
 from setuptools import setup, setuptools
-from mtcnn import __version__
+from pymdict import __version__
 
 
 __author__ = 'Iván de Paz Centeno'
