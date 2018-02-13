@@ -50,8 +50,7 @@ setup(name='pymdict',
       license='MIT',
       packages=setuptools.find_packages(),
       install_requires=[
-          "pymongo",
-          "bson"
+          "pymongo"
       ],
       classifiers=[
           'Environment :: Console',
