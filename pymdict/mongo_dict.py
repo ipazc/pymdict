@@ -1,6 +1,30 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#
+# MIT License
+#
+# Copyright (c) 2018 Iván de Paz Centeno
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
 from contextlib import contextmanager
 from functools import partial
-from time import sleep
 
 import pymongo
 from bson import ObjectId
@@ -13,7 +37,7 @@ from pymdict.mongo_query_parser import MongoQueryParser
 ___MONGO_DICT_META___ = "___MONGO_DICT_META___"
 
 
-class BasicMongoDict():
+class BasicMongoDict:
     """
     Mongo dictionary class.
 
@@ -92,7 +116,7 @@ class BasicMongoDict():
         For more information about queries, visit this wiki page: [TODO]
     """
 
-    def __init__(self, original_dict_id:str=None, mongo_host:str="localhost", mongo_port:int=27017,
+    def __init__(self, original_dict_id:str=None, mongo_host:str="192.168.2.115", mongo_port:int=27017,
                  mongo_database="mongo_dicts", credentials:tuple=None):
         """
         Instantiates the dictionary back-ended in mongo
@@ -225,7 +249,7 @@ class BasicMongoDict():
         for x in self._instance.find({}, {'_id':0, 'key': 1, 'value': 1}):
             yield x['key'], x['value']
 
-    def __call__(self, query:str, count_only:bool=False):
+    def __call__(self, query: str, count_only: bool=False):
         """
         Performs a query over the dictionary. It uses a simple query.
         :param query: string query to perform
@@ -625,7 +649,7 @@ class BulkMongoDictForked(BulkMongoDict):
             self.commit()
 
 
-class DictDropper():
+class DictDropper:
     """
     Warning: this is a class capable of removing dictionaries! it might leave the dict-system in an inconsistent state!
     use it carefully!
