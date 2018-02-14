@@ -1,15 +1,15 @@
 import unittest
+from time import sleep, time
 
 from bson import ObjectId
 
-from pymdict.mongo_dict import MongoDict, DictDropper
-
+from pymdict.mongo_dict import MongoDict, DictDropper, ForkedMongoDict
 
 MONGO_HOST = "localhost"
 MONGO_PORT = 27017
 
 
-class CheckDict():
+class CheckDict:
     
     def __init__(self, testcase_instance, dict_to_test):
         self._dict_to_test = dict_to_test
@@ -252,13 +252,15 @@ class ForkedMongoDictTests(unittest.TestCase):
         self.dropper.drop_dict(self.original.get_my_id())
         self.dropper.drop_dict(self.fork.get_my_id())
 
+
 class ForkedMongoDictTests2(unittest.TestCase):
 
     def setUp(self):
-        self.original = MongoDict(mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+        self._drop()
+        self.original = MongoDict("original", mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
         self.original["val1"] = 55
         self.original["val2"] = "hello"
-        self.fork = self.original.fork()
+        self.fork = self.original.fork("fork")
         del self.fork["val1"]
         del self.fork["val2"]
 
@@ -317,10 +319,20 @@ class ForkedMongoDictTests2(unittest.TestCase):
         test.test_query()
         self._assert_original_kept()
 
-    def tearDown(self):
+    def _drop(self):
         self.dropper = DictDropper(mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
-        self.dropper.drop_dict(self.original.get_my_id())
-        self.dropper.drop_dict(self.fork.get_my_id())
+        try:
+            self.dropper.drop_dict("original")
+        except KeyError:
+            pass
+
+        try:
+            self.dropper.drop_dict("fork")
+        except KeyError:
+            pass
+
+    def tearDown(self):
+        self._drop()
 
 
 class ForkedMongoDictTests3(unittest.TestCase):
@@ -409,6 +421,74 @@ class ForkedMongoDictTests3(unittest.TestCase):
 
     def tearDown(self):
         self._drop_db()
+
+
+class ForkSituationsTest(unittest.TestCase):
+
+    def setUp(self):
+        self._drop_db()
+        self.original = MongoDict("original", mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+        self.original2 = MongoDict("original", mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+        self.fork1 = self.original.fork("fork1")
+
+    def test_similar_dicts(self):
+        self.assertEqual(self.original, self.original2)
+
+    def test_fork_reflected_on_originals(self):
+        sleep(1.5)
+
+        self.original2['foo'] = 'bar'
+        self.assertEqual(self.original['foo'], 'bar')
+        self.assertEqual(type(self.original), ForkedMongoDict)
+        self.assertEqual(type(self.original2), ForkedMongoDict)
+
+    def tearDown(self):
+        self._drop_db()
+
+    def _drop_db(self):
+        try:
+            self.dropper = DictDropper(mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+            self.dropper.drop_dict("original")
+            self.dropper.drop_dict("fork1")
+
+        except:
+            pass
+
+
+class BenchmarkTest(unittest.TestCase):
+
+    def setUp(self):
+        self._drop_db()
+        self.benchmark = MongoDict("benchmark", mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+
+    def test_bulk_upsert_vs_non_upsert(self):
+
+        start_upsert = time()
+
+        with self.benchmark.bulk(do_upserts=True) as benchmark:
+            for x in range(2000):
+                benchmark["value_{}".format(x)] = {'upsert': True, 'id': x}
+
+        stop_upsert = time()
+        upsert_total_time = stop_upsert - start_upsert
+
+        with self.benchmark.bulk(do_upserts=False) as benchmark:
+            for x in range(2000):
+                benchmark["value2_{}".format(x)] = {'upsert': False, 'id': x}
+
+        insert_total_time = time() - stop_upsert
+        self.assertLess(insert_total_time, upsert_total_time)
+
+    def tearDown(self):
+        self._drop_db()
+
+    def _drop_db(self):
+        try:
+            self.dropper = DictDropper(mongo_host=MONGO_HOST, mongo_port=MONGO_PORT)
+            self.dropper.drop_dict("benchmark")
+
+        except:
+            pass
 
 
 if __name__ == '__main__':
