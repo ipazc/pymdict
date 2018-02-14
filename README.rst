@@ -5,6 +5,8 @@ PyMDict
     :target: https://badge.fury.io/py/pymdict
 .. image:: https://travis-ci.org/ipazc/pymdict.svg?branch=master
     :target: https://travis-ci.org/ipazc/pymdict
+.. image:: https://coveralls.io/repos/github/ipazc/pymdict/badge.svg?branch=master
+    :target: https://coveralls.io/github/ipazc/pymdict?branch=master
 
 
 Advanced Python Mongo Dict.
