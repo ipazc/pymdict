@@ -141,7 +141,7 @@ class BasicMongoDict:
         if credentials is not None and len(credentials) == 2:
             mongo_uri += "{}:{}@".format(credentials[0], credentials[1])
 
-        mongo_uri += "{}:{}".format(mongo_host, mongo_port)
+        mongo_uri += "{}:{}/{}".format(mongo_host, mongo_port, mongo_database)
 
         try:
             self._client = MongoClient(mongo_uri)
@@ -306,7 +306,10 @@ class BasicMongoDict:
         return self._instance.find().count()
 
     def __del__(self):
-        self._client.fsync()
+        try:
+            self._client.fsync()
+        except pymongo.errors.OperationFailure:
+            pass
         self._client.close()
 
     def last_element_id(self):
